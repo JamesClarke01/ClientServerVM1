@@ -12,6 +12,9 @@ int main(int argc, char *argv[]) {
 	char recvbuffer[BUFSIZE]; // I/O buffer
 	char sendbuffer[BUFSIZE]; 
 	int numBytes = 0;
+	//char echoString[64];
+	
+	//fputs("Start!",stdout);	
 
 	if (argc < 3) // Test for correct number of arguments
 	DieWithUserMessage("Parameter(s)", "<Server Address> <Server Port>");
@@ -21,9 +24,7 @@ int main(int argc, char *argv[]) {
 	in_port_t servPort = atoi(argv[2]);  //second arg: server port 
 
 	char *echoString = argv[3];
-	
-	char *getReqString = "GET /index.html HTTP/1.1\r\nHost: www.example.com\r\nConnection: close\r\n\r\n";
-
+	printf("%s", echoString);
 	// Create a reliable, stream socket using TCP
 	int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
@@ -46,7 +47,7 @@ int main(int argc, char *argv[]) {
 	
 
 	//send
-	snprintf(sendbuffer, sizeof(sendbuffer), getReqString, echoString);  //store the contents of the input string in the sendBuffer
+	snprintf(sendbuffer, sizeof(sendbuffer), "%s", echoString);  //store the contents of the input string in the sendBuffer
 
 	ssize_t numBytesSent = send(sock, sendbuffer, strlen(sendbuffer), 0);  //send sendBuffer content to the client
 

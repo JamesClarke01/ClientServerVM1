@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
 	else if (numBytes ==0)
 		DieWithUserMessage("recy()", "connection closed prematurely");
 
-	fputc('\n', stdout); // Print a final linefeed
+	fputs("\n\n", stdout); // Print a final linefeed
 
 	close(sock);
 	exit(0);

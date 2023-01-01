@@ -51,22 +51,6 @@ int main(int argc, char *argv[]) {
                 DieWithSystemMessage("send() failed");
 	
 
-	//recieve
-	while((numBytes = recv(sock, recvbuffer, BUFSIZE - 1, 0)) > 0)
-	{
-		recvbuffer[numBytes] = '\0'; // Terminate the string!
-		fputs(recvbuffer, stdout); // Print the echo buffer
-		/*Recive up to the buffer size
-		(minus 1 to leave space for a null terminator) 
-		bytes from the sender*/
-	}	
-	if (numBytes < 0)
-		DieWithSystemMessage("recy() failed");
-	else if (numBytes ==0)
-		DieWithUserMessage("recy()", "connection closed prematurely");
-
-	fputc('\n', stdout); // Print a final linefeed
-
 	close(sock);
 	exit(0);
 }
